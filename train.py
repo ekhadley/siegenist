@@ -22,7 +22,7 @@ class model:
     #@TinyJit
     def forward(self, X):
         X = X.reshape(-1, 1, self.imshape[0], self.imshape[1])
-        X = X.conv2d(self.conv1, padding=1)
+        X = X.conv2d(self.conv1, padding=1).softmax()
         X = X.reshape(-1, self.imshape[0]*self.imshape[1]*self.conv1.shape[0])
         #print(f"{red}{X.shape=}{endc}")
         X = X.dot(self.lin1).relu()
