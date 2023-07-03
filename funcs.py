@@ -13,7 +13,7 @@ def sample(Xtrain, Ytrain, num):
     Y = Ytrain[samp]
     return X, Y
 
-def makedataset(data, asnumpy=False):
+def makedatasets(data, asnumpy=False):
     train = data[0:len(data)*9//10]
     test = data[len(data)*9//10:-1]
 
@@ -48,23 +48,13 @@ def getimgs(dir, num, label=None, min=0, filetype="png"):
     impath = f"{dir}\\{min}.{filetype}"
     exists = imexists(impath) 
     assert exists, f"attempt to load image  at {impath} failed!"
-    if num==-1:
-        i = min
-        while exists:
-            im = cv2.imread(impath)
-            ims.append(im)
-            labels.append(label)
-            i += 1
-            impath = f"{dir}\\{i}.{filetype}"
-            exists = imexists(impath) 
-    elif num > 0:
-        for i in range(min, num):
-            impath = f"{dir}\\{i}.{filetype}"
-            exists = imexists(impath) 
-            assert exists, f"attempt to load image  at {impath} failed!"
-            im = cv2.imread(impath)
-            ims.append(im)
-            labels.append(label)
+    for i in range(min, num):
+        impath = f"{dir}\\{i}.{filetype}"
+        exists = imexists(impath) 
+        assert exists, f"attempt to load image  at {impath} failed!"
+        im = cv2.imread(impath)
+        ims.append(im)
+        labels.append(label)
     if label==None: return ims
     return ims, labels
 
