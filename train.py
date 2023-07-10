@@ -2,11 +2,8 @@ import cv2, random, time, numpy as np
 from tqdm import trange
 from tinygrad import nn
 from tinygrad.nn import optim
-from tinygrad.jit import TinyJit
-from tinygrad.lazy import Device
 from funcs import *
 from mnist import MNIST
-Device.default = "GPU"
 
 class model:
     def __init__(self, imshape, categories, lr=.01):
