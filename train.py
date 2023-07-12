@@ -43,7 +43,7 @@ class model:
         self.optimizer.step()
         return out, loss
 
-ddir = "D:\\wgmn\\tinygrad\\datasets\\mnist"
+ddir = "D:\\\\datasets\\mnist"
 mn = MNIST(path=ddir, return_type="numpy")
 Xtrain, Ytrain = mn.load_training()
 Xtrain, Ytrain = np.reshape(Xtrain, (60_000, 28, 28)).astype(np.float32), Ytrain.astype(np.float32)
@@ -62,6 +62,8 @@ Xtest = Xtest.reshape((-1, 20, 30))
 bs = 32
 sh = Xtest[0].shape
 sn = model(imshape=(sh[1], sh[0], 1), categories=10)
+
+print(f"{red}{sn.lin1.device=}{endc}")
 
 nn.Tensor.training = True
 for i in (t := trange(2000, ncols=100, desc=f"{purple}training")):
